@@ -21,11 +21,11 @@ func ASCIIart(inputStrings []string) string {
 
 	// Process each input string
 	for _, input := range inputStrings {
-		lines := strings.Split(input, "\\n")
+		lines := strings.Split(input, "\n")
 		for _, line := range lines {
 			// Print a newline for empty lines
 			if line == "" {
-				output.WriteString("\n")
+				output.WriteString("")
 			} else {
 				// Print ASCII art for each line
 				for i := 0; i < 8; i++ {
@@ -33,7 +33,7 @@ func ASCIIart(inputStrings []string) string {
 						// Calculate the starting index of the character in the ASCII art
 						startIndex := int(char-32)*9 + 1
 						// Append the corresponding line of the ASCII art to the output
-						output.WriteString(asciiArt[startIndex-1+i])
+						output.WriteString(asciiArt[startIndex+i])
 					}
 					output.WriteString("\n")
 				}
@@ -44,11 +44,3 @@ func ASCIIart(inputStrings []string) string {
 	return output.String()
 }
 
-// ASCIIartContent is the ASCII art content to be used by the function
-// var asciiArtContent = `
-//    _____
-//   / ____|
-//  | |  __  __ _ _ __ ___   ___
-//  | | |_ |/ _  | '_   _  \/ _ \
-//  | |__| | (_| | | | | | |  __/
-//   \_____|\__,_|_| |_| |_|\___|`
