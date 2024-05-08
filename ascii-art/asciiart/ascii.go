@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 )
-
+//
 // ASCIIart generates ASCII art based on the input strings
 func ASCIIart(inputStrings []string) string {
 	// Read the content of the ASCII art file
