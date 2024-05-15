@@ -1,4 +1,4 @@
-module numbers
+module param
 
 go 1.22.1
 
