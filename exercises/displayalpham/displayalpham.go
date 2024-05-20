@@ -8,18 +8,15 @@ import "github.com/01-edu/z01"
 func main(){
 	// var result string
 	
+	var result []rune
 	for i := 'a'; i <= 'z'; i++ {
-
-		if i % 2==0{
-			char :=ToUpper(i)
-			z01.PrintRune(char)
-		} else if i % 2 == 1 {
-			cha := ToLower(i)
-			z01.PrintRune(cha)
+		if (i - 'a')%2 == 0 { // Checking if the letter's index in the alphabet is even
+			result += rune(i) - 32 // Convert even letters to uppercase
+		} else {
+			result += rune(i) // Keep odd letters in lowercase
 		}
-		// i = append(i, result)
-
 	}
+	z01.PrintRune(i)
 	z01.PrintRune('\n')
 
 }
