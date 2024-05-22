@@ -19,9 +19,7 @@ func printAlphabet() {
 	fmt.Println() // Print newline after printing the alphabet
 }
 
-
 // ver 2.0
-
 
 // package main
 
@@ -49,6 +47,3 @@ func printAlphabet() {
 // func displayAlphabet(alphabet string) {
 // 	fmt.Println(alphabet)
 // }
-
-
-

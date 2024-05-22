@@ -12,9 +12,10 @@ func main() {
 func printAlphabet() {
 	for i := 'a'; i <= 'z'; i++ {
 		if (i-'a')%2 == 0 {
-			z01.PrintRune(i - 32) // Convert even letters to uppercase
+			z01.PrintRune(i) // Convert even letters to uppercase
 		} else {
-			z01.PrintRune(i) // Keep odd letters in lowercase
+			z01.PrintRune(i - 32) // Keep odd letters in lowercase
 		}
+		// fmt.Printf("Debug: Printed rune %c\n", i)
 	}
 }
