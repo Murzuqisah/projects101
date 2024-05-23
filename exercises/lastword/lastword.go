@@ -20,7 +20,7 @@ func LastWord(s string) string {
 }
 
 func main() {
-	str := "hello, world"
+	str := " hello"
 	result := LastWord(str)
 	fmt.Println(result)
 }

@@ -10,7 +10,7 @@ func Max(arr []int) int {
 	// initialize the first index as the maximum of the array
 	max = arr[0]
 
-	// loop through the array
+	// loop through the array to find a maximum value greater than the first index, and return its value
 	for _, elem := range arr {
 		if elem > max {
 			max = elem
