@@ -1,32 +1,88 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"strings"
 	"testing"
 
-	ascii "ascii/asciiart"
+	"ascii/arguments"
+	"ascii/readfile"
+
+	"github.com/stretchr/testify/assert" // Using testify for assertions
 )
 
-func TestASCIIart(t *testing.T) {
-	inputStrings := []string{"H"}
+// MockExitHandler is a mock implementation of os.Exit to capture the exit status.
+type MockExitHandler struct {
+	status        int
+	name          string
+	args          []string
+	bannerFile    string
+	expectedLines []string
+	expectedExit  int
+}
 
-	expectedOutput := `
- _    _  
-| |  | | 
-| |__| | 
-|  __  | 
-| |  | | 
-|_|  |_| 
-         
-`
+var MockExitHandlers = []MockExitHandler{
+	{
+		name:          "Valid Arguments and Banner File",
+		args:          []string{"programName", "bannerfile.txt"},
+		bannerFile:    "bannerfile.txt",
+		expectedLines: []string{"Line 1", "Line 2", "Line 3"},
+		expectedExit:  0,
+	},
+	{
+		name:         "Missing Arguments",
+		args:         []string{"programName"},
+		expectedExit: 0,
+	},
+	{
+		name:         "Invalid Banner File",
+		args:         []string{"programName", "invalidfile.txt"},
+		bannerFile:   "invalidfile.txt",
+		expectedExit: 0,
+	},
+}
 
-	actualOutput := ascii.ASCIIart(inputStrings)
+func (m *MockExitHandler) Exit(code int) {
+	m.status = code
+}
 
-	// Normalize line breaks for comparison
-	expectedOutput = strings.ReplaceAll(expectedOutput, "\r\n", "\n")
-	actualOutput = strings.ReplaceAll(actualOutput, "\r\n", "\n\n")
+func TestMain(t *testing.T) {
+	for _, tc := range MockExitHandlers {
+		t.Run(tc.name, func(t *testing.T) {
+			// Capture os.Exit calls using MockExitHandler
+			exitHandler := &MockExitHandler{}
+			osExit = exitHandler.Exit
+			defer func() { osExit = os.Exit }() // Restore osExit after the test
 
-	if actualOutput != expectedOutput {
-		t.Errorf("Unexpected ASCII art generated.\nExpected:\n%s\nActual:\n%s", expectedOutput, actualOutput)
+			// Mock readfile.ReadFile function
+			readfileMock := func(filename string) ([]byte, error) {
+				if filename == tc.bannerFile {
+					return []byte(strings.Join(tc.expectedLines, "\n")), nil
+				}
+				return nil, fmt.Errorf("no such file")
+			}
+
+			// Mock arguments.HandleNewLines function
+			argumentsMock := func(args []string) string {
+				return strings.Join(args[1:], " ")
+			}
+
+			readfile.ReadFile = readfileMock
+			arguments.HandleNewLines = argumentsMock
+
+			// Execute the main function with test arguments
+			os.Args = tc.args
+			main()
+
+			// Assert the expected behavior
+			assert.Equal(t, tc.expectedExit, exitHandler.status)
+
+			if tc.expectedExit == 0 {
+				// Check the output (ASCII art)
+				expectedOutput := strings.Join(tc.expectedLines, "\n") + "\n" + strings.Join(tc.args[1:], " ") + "\n"
+				assert.Equal(t, expectedOutput, buf.String())
+			}
+		})
 	}
 }

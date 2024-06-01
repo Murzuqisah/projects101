@@ -4,24 +4,42 @@ import (
 	"fmt"
 	"os"
 
-	ascii "ascii/asciiart"
-	//"github.com/Murzuqisah/ascii/ascii" // Import the ascii package from your module
+	"ascii/bannerfile"
+	"ascii/printascii"
+	"ascii/readfile"
+	"ascii/splitlines"
+	"ascii/escapesequences"
 )
 
 func main() {
-	// Define input strings
-	inputStrings := os.Args[1:]
-	if os.Args[0] == "\n" {
-		fmt.Println()
-		return
+	// checking if there is enough arguments in the command line
+	if len(os.Args) < 2 {
+		fmt.Println("Error : Invalid length of arguments")
+		os.Exit(0)
 	}
-	if os.Args[0] == "" {
+	// checks for the banner file in the commad line by calling the GetBannerFile fuction and also 
+	// checks if the argument is an empty string
+	args := bannerfile.GetBannerFile(os.Args)
+	if args == "" {
 		return
 	}
 
-	// Generate ASCII art
-	asciiArt := ascii.ASCIIart(inputStrings)
+	// Reading the content of the selected banner file(argss) by calling the ReadFile fuction then
+	// storing the variable in the variable initialized(fileContent) while handling the error
+	fileContent, err := readfile.ReadFile(args)
+	if err != nil {
+		fmt.Println("Error: no such named file in the directory")
+		return
+	}
 
-	// Print the generated ASCII art
-	fmt.Println(asciiArt)
+	// passing the content (fileContent) of the selected banner file (args) through the SplitLines
+	// fuction then stores the result into a variable (lines)
+	lines := splitlines.SplitLines(fileContent, args)
+
+	arguments := escapesequences.EscapeSequences(os.Args)
+	if arguments == "" {
+		return
+	}
+
+	printascii.PrintASCIIArt(lines, arguments)
 }

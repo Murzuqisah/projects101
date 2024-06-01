@@ -1,0 +1,7 @@
+mode: set
+ascii/escapesequences/escapesequences.go:10.44,14.42 3 1
+ascii/escapesequences/escapesequences.go:14.42,16.3 1 0
+ascii/escapesequences/escapesequences.go:17.2,17.32 1 1
+ascii/escapesequences/escapesequences.go:17.32,18.21 1 1
+ascii/escapesequences/escapesequences.go:18.21,21.4 2 0
+ascii/escapesequences/escapesequences.go:23.2,23.51 1 1
