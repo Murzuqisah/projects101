@@ -2,7 +2,6 @@ package main
 
 import (
 	"os"
-	"math"
 )
 
 const x = "3.141"
@@ -13,4 +12,5 @@ func main() {
 	for _, arg := range args {
 		output = math.
 	}
+	return
 }

@@ -46,7 +46,7 @@ func main() {
 		// split the txt file
 		lineSlc := strings.Split(string(file), "\n")
 
-		// output := ascii.printArguments(lineSlc)
+		// output := printarguments.printArguments(lineSlc)
 
 		// print ASCII-art
 		printarguments.PrintArguments(lineSlc, args)
