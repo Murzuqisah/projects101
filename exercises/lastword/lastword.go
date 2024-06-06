@@ -1,10 +1,13 @@
-package main
+package lastword
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
-func LastWord(s string) string {
+func LastWord(args string) string {
+	args = os.Args[1]
 	// word := string(s)[len(s)-1]
-
 	var lastWord string
 
 	for i := 0; i < len(s); i++ {

@@ -1,11 +1,9 @@
 package twosums_test
 
 import (
-	"testing"
 	"sort"
-	"numbers/twosums"
+	"testing"
 )
-
 
 // func BenchmarkTwoSum(b *testing.B) {
 // 	for i := 0; i < b.N; i++ {
@@ -14,9 +12,10 @@ import (
 // }
 
 func BenchmarkTwoSumSorted(b *testing.B) {
+	nums:= 
 	sort.Ints(nums)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		numbers.TwoSumSorted(nums, target)
-	} 
+	}
 }
