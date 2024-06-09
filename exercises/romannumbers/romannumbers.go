@@ -1,4 +1,4 @@
-package main
+package romannumbers
 
 import "fmt"
 
@@ -62,10 +62,5 @@ func IntToRoman(number int64) string {
 
 
 func main() {
-	let num = 32;
-	let roman_number = RomanNumber::from(num);
-	for digit in roman_number.digits {
-		print!("{}", digit.symbol);
-	}
-	println!();
+	
 }
