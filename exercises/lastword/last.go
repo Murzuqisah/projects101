@@ -1,19 +1,20 @@
-package main
+package lastword
 
 import (
 	"os"
+
 	"github.com/01-edu/z01"
 )
 
-func main() {
+func LastWd() {
 	str := os.Args[1]
-	for str[len(str)-1] == ' '{
+	for str[len(str)-1] == ' ' {
 		str = str[:len(str)-1]
 	}
 
 	res := ""
-	for i := len(str)-1; i >= 0; i-- {
-		if str[i] == ' '{
+	for i := len(str) - 1; i >= 0; i-- {
+		if str[i] == ' ' {
 			res = str[i+1:]
 			break
 		}

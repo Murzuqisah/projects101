@@ -1,10 +1,12 @@
 package main
 
 import (
-	"fmt"
-	"exercises/max"
-	// "exercises/power"
 	"exercise/firstrune"
+	"fmt"
+
+	"exercises/lastword"
+	"exercises/max"
+	"exercises/power"
 )
 
 func main() {
@@ -12,11 +14,16 @@ func main() {
 	max := max.Max(arrInt)
 	fmt.Println(max)
 
-	// ispowerof2()
-	//num := power.IsPowerOf2(75)
+	num := power.IsPowerOf2(75)
+	fmt.Println(num)
 
 	// first rune
 	s := firstrune.FirstRune("Hello")
 	fmt.Println(s)
 
+	// last word
+
+	str := " hello"
+	result := lastword.LastWord(str)
+	fmt.Println(result)
 }

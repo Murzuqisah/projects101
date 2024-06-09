@@ -1,7 +1,6 @@
 package lastword
 
 import (
-	"fmt"
 	"os"
 )
 
@@ -10,11 +9,11 @@ func LastWord(args string) string {
 	// word := string(s)[len(s)-1]
 	var lastWord string
 
-	for i := 0; i < len(s); i++ {
-		if s[i] != ' ' {
-			lastWord += string(s[i])
+	for i := 0; i < len(args); i++ {
+		if args[i] != ' ' {
+			lastWord += string(args[i])
 		} else {
-			if i+1 < len(s) && s[i+1] != ' ' {
+			if i+1 < len(args) && args[i+1] != ' ' {
 				lastWord = ""
 			}
 		}
@@ -22,8 +21,19 @@ func LastWord(args string) string {
 	return lastWord
 }
 
-func main() {
-	str := " hello"
-	result := LastWord(str)
-	fmt.Println(result)
-}
+// ver 2.0
+
+// package lastword
+
+// import (
+// 	"os"
+// 	"strings"
+// )
+
+// func LastWord(args string) string {
+// 	words := strings.Fields(os.Args[1])
+// 	if len(words) == 0 {
+// 		return ""
+// 	}
+// 	return words[len(words)-1]
+// }
